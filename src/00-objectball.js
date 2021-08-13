@@ -116,11 +116,66 @@ function gameObject(){
     return teams
 }
 
-
-//console.log(gameObject())
-
-function homeTeamName(){
-  let object = gameObject()
-
-  return object['home']['teamName']
+function getAllPlayers(){
+    let teams = gameObject()
+    return  Object.assign({}, teams.home.players, teams.away.players)
 }
+function pickTeam(teamNamec){
+    let teams = gameObject()
+    for (let team in teams) {
+        if (teams[team].teamName === teamNamec) {
+           return teams[team]
+        }
+    }
+}
+
+////////////////////////////////////////////
+ function numPointsScored (nameOfPlayer){
+    allPlayers = getAllPlayers()
+    return allPlayers[nameOfPlayer].points
+ }  
+
+ function shoeSize(nameOfPlayer) {
+    allPlayers = getAllPlayers()
+    return allPlayers[nameOfPlayer].shoe
+ }
+////////////////
+ function teamColors(teamNamec){
+    return team = pickTeam(teamNamec).colors
+ }
+
+ function playerNumbers(teamNamec){
+     newArr = []
+    const players = pickTeam(teamNamec).players
+    for (const player in players) {
+        newArr.push((players[player].number))
+    }
+    return newArr
+ }
+
+function teamNames  (gameObject){
+    return [gameObject().home.teamName, gameObject().away.teamName]
+}
+function playerStats(nameOfPlayer){
+    allPlayers = getAllPlayers()
+    return allPlayers[nameOfPlayer]
+}
+function bigShoeRebounds(){
+    newArr = []
+    const players = getAllPlayers()
+    for (const player in players) {
+        newArr.push((players[player].points))
+    }
+    for (const player in players) {
+        if ((players[player].points) === Math.max(...newArr))
+            return player
+    }   
+}
+
+
+
+//////////////////
+ console.log(
+    bigShoeRebounds()
+ )
+ 
